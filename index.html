@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JF Chan | Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Gruvbox Dark Theme */
+            --bg-dark: #282828;
+            --bg-dark-alt: #3c3836;
+            --fg-dark: #ebdbb2;
+            --fg-dark-dim: #a89984;
+            --red-dark: #cc241d;
+            --green-dark: #98971a;
+            --yellow-dark: #d79921;
+            --blue-dark: #458588;
+            --purple-dark: #b16286;
+            --aqua-dark: #689d6a;
+            --orange-dark: #d65d0e;
+            
+            /* Gruvbox Light Theme */
+            --bg-light: #fbf1c7;
+            --bg-light-alt: #f2e5bc;
+            --fg-light: #3c3836;
+            --fg-light-dim: #7c6f64;
+            --red-light: #cc241d;
+            --green-light: #98971a;
+            --yellow-light: #d79921;
+            --blue-light: #458588;
+            --purple-light: #b16286;
+            --aqua-light: #689d6a;
+            --orange-light: #d65d0e;
+            
+            /* Default to dark theme */
+            --bg: var(--bg-dark);
+            --bg-alt: var(--bg-dark-alt);
+            --fg: var(--fg-dark);
+            --fg-dim: var(--fg-dark-dim);
+            --accent: var(--blue-dark);
+            --accent-secondary: var(--green-dark);
+        }
+
+        [data-theme="light"] {
+            --bg: var(--bg-light);
+            --bg-alt: var(--bg-light-alt);
+            --fg: var(--fg-light);
+            --fg-dim: var(--fg-light-dim);
+            --accent: var(--blue-light);
+            --accent-secondary: var(--green-light);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--bg-alt);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-secondary);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--fg-dim);
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-alt);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            color: var(--fg);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            padding: 100px 0;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: var(--bg-alt);
+            border-radius: 50%;
+            color: var(--fg);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            transform: translateY(-3px);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--accent);
+            color: var(--bg);
+            border-radius: 5px;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-secondary);
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background-color: var(--bg-alt);
+            border-radius: 8px;
+            padding: 25px;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .project-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .tool-tag {
+            background-color: var(--bg);
+            color: var(--fg-dim);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Skills Section */
+        .skills-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-category h3 {
+            color: var(--accent-secondary);
+            margin-bottom: 15px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background-color: var(--bg-alt);
+            color: var(--fg);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item i {
+            color: var(--accent);
+            width: 20px;
+        }
+
+        /* Blog Section */
+        .blog-posts {
+            margin-top: 40px;
+        }
+
+        .blog-post {
+            background-color: var(--bg-alt);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .blog-post:hover {
+            transform: translateX(5px);
+        }
+
+        .blog-post h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--fg-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <img src="https://via.placeholder.com/200" alt="JF Chan" class="profile-img">
+                <div class="hero-text">
+                    <h1>Hi, I'm JF Chan 👋</h1>
+                    <p class="tagline">A diploma student passionate about networking, automation, and development.</p>
+                    <p>💻 Building systems, 💡 automating workflows, ☁️ exploring Linux.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                    <a href="#" class="btn">Download Resume</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>I'm a Diploma in IT student from Malaysia who loves solving technical challenges — whether it's configuring networks, building software, or automating repetitive tasks.</p>
+                <p>I enjoy exploring Linux environments (currently daily-driving Omarchy 🖤) and finding ways to make technology simpler and smarter.</p>
+                <p>Currently preparing for my 2026 internship and expanding my skill set in automation and system integration.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>📂 Spotify Waybar Integration</h3>
+                    <p>A custom bash + zscroll module that syncs Spotify playback status on Waybar.</p>
+                    <div class="project-tools">
+                        <span class="tool-tag">Bash</span>
+                        <span class="tool-tag">Waybar</span>
+                        <span class="tool-tag">zscroll</span>
+                        <span class="tool-tag">playerctl</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#">View on GitHub</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>🤖 Job Tracker Automation</h3>
+                    <p>Automated workflow to collect internship postings and send to Discord.</p>
+                    <div class="project-tools">
+                        <span class="tool-tag">n8n</span>
+                        <span class="tool-tag">Discord API</span>
+                        <span class="tool-tag">Web Scraping</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#">Project Repo</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>🌐 Network Configuration Tool</h3>
+                    <p>A Python script to automate VLAN and IP configuration on Linux systems.</p>
+                    <div class="project-tools">
+                        <span class="tool-tag">Python</span>
+                        <span class="tool-tag">Linux CLI</span>
+                        <span class="tool-tag">Networking</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skills-categories">
+                <div class="skill-category">
+                    <h3>💻 Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>⚙️ Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">n8n</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">Omarchy</span>
+                        <span class="skill-tag">Waybar</span>
+                        <span class="skill-tag">Hyprland</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🌐 Networking</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">VLANs</span>
+                        <span class="skill-tag">IP Configuration</span>
+                        <span class="skill-tag">Linux CLI</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🧠 Learning</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Automation workflows</span>
+                        <span class="skill-tag">API integrations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>📄 Resume</h3>
+                    <a href="#" class="btn">Download PDF</a>
+                </div>
+                <div class="contact-info">
+                    <h3>📬 Contact Me</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>jfchan@example.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="#">/in/jfchan</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <a href="#">/jfchan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog">
+        <div class="container">
+            <h2>My Learning Notes</h2>
+            <div class="blog-posts">
+                <div class="blog-post">
+                    <h3>Automating Spotify with Waybar</h3>
+                    <p>How I created a custom module to display Spotify playback status on my Waybar.</p>
+                </div>
+                <div class="blog-post">
+                    <h3>Configuring VLANs in Packet Tracer</h3>
+                    <p>Step-by-step guide to setting up VLANs for network segmentation.</p>
+                </div>
+                <div class="blog-post">
+                    <h3>Setting up Omarchy as a daily driver</h3>
+                    <p>My experience transitioning to Omarchy Linux and customizing my workflow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 JF Chan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        
+        // Update icon based on current theme
+        if (currentTheme === 'light') {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            if (newTheme === 'light') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+    </script>
+</body>
+</html>
